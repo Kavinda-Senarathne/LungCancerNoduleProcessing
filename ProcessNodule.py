@@ -514,3 +514,30 @@ np.save(datafolder + '/nodulemaskscircle.npy', nodulemaskscircle)
 plt.hist(nodulemeanhu, bins=20)
 plt.hist(nonnodulemeanhu)
 plt.show()
+
+plt.hist(nodulelocations['eq. diam.'], bins=80)
+plt.xlabel("Nodule Diameter (mm)")
+plt.ylabel("Frequency")
+plt.show()
+
+plt.hist(nodulelocations['volume'].loc[nodulelocations['volume']<6000], bins=80)
+plt.xlabel("volume (cc)")
+plt.ylabel("Frequency")
+plt.show()
+plt.hist(nodulelocations['volume'].loc[nodulelocations['volume']<1000], bins=80)
+plt.xlabel("volume (cc)")
+plt.ylabel("Frequency")
+plt.show()
+plt.hist(nodulelocations['volume'].loc[nodulelocations['volume']<400], bins=80)
+plt.xlabel("volume (cc)")
+plt.ylabel("Frequency")
+plt.show()
+
+nodcount = []
+for i in range(len(patients)):
+    coord = nodule_coordinates(nodulelocations, meta.iloc[i])
+    nodcount.append(len(coord))
+
+plt.hist(nodcount, bins=25)
+plt.xlabel("Number of Nodules per Patient")
+plt.show()
